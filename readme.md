@@ -13,7 +13,7 @@ Run
 
 Add the following to app/config/app.php
 
-    'Agriya\Webshoppack\WebshoppackServiceProvider',
+    'Agriya\Webshopauthenticate\WebshoppackServiceProvider',
 
 Publish the config
 
