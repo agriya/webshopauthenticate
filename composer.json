@@ -1,0 +1,30 @@
+{
+    "name": "agriya/webshopauthenticate",
+    "description": "",
+    "authors": [
+        {
+            "name": "Agriya",
+            "email": "r.senthilvasan@agriya.in"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "cartalyst/sentry": "2.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers",
+            "src/models",
+            "src/migrations",
+            "src/seeds",
+            "src/services",
+            "src/lib"
+        ],
+        "psr-0": {
+            "Agriya\\Webshopauthenticate\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
