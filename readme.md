@@ -19,9 +19,17 @@ Publish the config
 
     php artisan config:publish agriya/webshopauthenticate
 
+Publish the asset
+
+    php artisan asset:publish agriya/webshopauthenticate
+
 Run the migration
 
     php artisan migrate --package="agriya/webshopauthenticate"
+
+Run the db seed
+
+    php artisan db:seed --class="Agriya\Webshopauthenticate\UsersGroupsTableSeeder"
 
 Add the following to app/routes.php
 
@@ -66,6 +74,19 @@ Add the following to app/routes.php
 		'Agriya\Webshopauthenticate\AuthController@postChangePassword'
 	);
 	Route::get(\Config::get('webshopauthenticate::uri').'/activation/{activationCode}', 'Agriya\Webshopauthenticate\AuthController@getActivate');
-	Route::get(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@getIndex');
-	Route::post(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@postIndex');
+	Route::group(array('before' => 'sentry.member'), function()
+	{
+		Route::get(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@getIndex');
+		Route::post(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@postIndex');
+	});
+	Route::group(array('before' => 'sentry.admin'), function()
+	{
+		Route::get(Config::get('webshopauthenticate::admin_uri'), 'Agriya\Webshopauthenticate\AdminUserController@index');
+		Route::get(Config::get('webshopauthenticate::admin_uri').'/users/add', 'Agriya\Webshopauthenticate\AdminUserController@getAddUsers');
+		Route::post(Config::get('webshopauthenticate::admin_uri').'/users/add', 'Agriya\Webshopauthenticate\AdminUserController@postAddUsers');
+		Route::get(Config::get('webshopauthenticate::admin_uri').'/users/edit/{user_id}', 'Agriya\Webshopauthenticate\AdminUserController@getEditUsers');
+		Route::post(Config::get('webshopauthenticate::admin_uri').'/users/edit/{user_id}', 'Agriya\Webshopauthenticate\AdminUserController@postEditUsers');
+		Route::any(Config::get('webshopauthenticate::admin_uri').'/users/changestatus', 'Agriya\Webshopauthenticate\AdminUserController@getChangeUserStatus');
+	});
 	
+##
