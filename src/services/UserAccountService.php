@@ -159,22 +159,22 @@ class UserAccountService
 
 	public function sendActivationCode($user, $admin_user_create = false)
 	{
-		$activation_code = $user->getActivationCode();
-
 		//If auto activate false
 		if(!\Config::get('webshopauthenticate::user_auto_activate') && !$admin_user_create)
 		{
-			$data = array('user'          => $user,
-					  'activationUrl' => \URL::to(\Config::get('webshopauthenticate::uri').'/activation/'.$activation_code),
-					);
-			\Mail::send('webshopauthenticate::emails.auth.userActivation', $data, function($m) use ($user){
-				$m->to($user->email, $user->first_name);
-				$subject = \Lang::get('webshopauthenticate::email.userActivation');
-				$m->subject($subject);
-			});
+			\Event::fire('send.activation.code', array($user));
+//			$data = array('user'          => $user,
+//					  'activationUrl' => \URL::to(\Config::get('webshopauthenticate::uri').'/activation/'.$activation_code),
+//					);
+//			\Mail::send('webshopauthenticate::emails.auth.userActivation', $data, function($m) use ($user){
+//				$m->to($user->email, $user->first_name);
+//				$subject = \Lang::get('webshopauthenticate::email.userActivation');
+//				$m->subject($subject);
+//			});
 		}
 		else
 		{
+			$activation_code = $user->getActivationCode();
 			if($admin_user_create)
 				$this->activateUser($user, $activation_code, false, $admin_user_create);
 			else
@@ -213,7 +213,8 @@ class UserAccountService
 		try
 		{
 			$user->attemptActivation($activationCode);
-			$this->sendUserWelcomeMail($user, $admin_user_create);
+			\Event::fire('send.welcome.mail', array($user));
+			//$this->sendUserWelcomeMail($user, $admin_user_create);
 			if($auto_login)
 				$resp = \Sentry::login($user, '');	// login once activated account
 			return true;
