@@ -404,5 +404,46 @@ class CUtil
 	{
 		return  \Sentry::getUser();
 	}
+
 	/* Auth functions end */
+	public static function getUserIdFromSlug($seo_title)
+	{
+		$user_id = '';
+		$matches = null;
+		preg_match('/^(U[0-9]{6})\-/', $seo_title, $matches);
+		if (!isset($matches[1])) {
+			preg_match('/^(U[0-9]{3})$/', $seo_title, $matches);
+		}
+		if (isset($matches[1])){
+			$user_id = $matches[1];
+			$user_id = ltrim($user_id, 'U');
+			$user_id = ltrim($user_id, '0');
+
+		}
+		return $user_id;
+	}
+	/**
+	 * CUtil::isShopOwner()
+	 * added by mohamed_158at11
+	 *
+	 * @return boolean
+	 */
+	public static function isShopOwner($user_id = null)
+	{
+		if(is_null($user_id))
+		{
+			$user = \Config::get('webshoppack::logged_user_id');
+			$logged_user_id = $user();
+		}
+		else
+			$logged_user_id = $user_id;
+
+		if($logged_user_id > 0)
+		{
+			$details = \Agriya\Webshoppack\ShopDetails::where('user_id', $logged_user_id)->count();
+			if($details)
+				return true;
+		}
+		return false;
+	}
 }

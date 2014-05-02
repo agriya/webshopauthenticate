@@ -1,4 +1,4 @@
-@extends('webshopauthenticate::base')
+@extends(Config::get('webshopauthenticate::package_layout'))
 @section('content')
 	@include('webshopauthenticate::notifications')
 	@if(Session::has('success_message'))

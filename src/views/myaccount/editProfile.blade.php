@@ -1,4 +1,4 @@
-@extends('webshopauthenticate::base')
+@extends(Config::get('webshopauthenticate::package_layout'))
 @section('content')
     <h1 class="title-one">{{ \Lang::get('webshopauthenticate::myaccount/form.account_menu_edit_profile') }}</h1>
     @if (Session::has('success_message') && Session::get('success_message') != "")

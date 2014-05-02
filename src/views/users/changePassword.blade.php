@@ -1,4 +1,4 @@
-@extends('webshopauthenticate::base')
+@extends(Config::get('webshopauthenticate::package_layout'))
 @section('content')
 	<h1 class="title-one">{{ \Lang::get("webshopauthenticate::auth/form.change_password.legend") }}</h1>
 

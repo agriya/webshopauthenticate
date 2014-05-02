@@ -1,4 +1,4 @@
-@extends('webshopauthenticate::base')
+@extends(\Config::get('webshopauthenticate::package_admin_layout'))
 @section('content')
 	<!-- Notifications -->
     @include('webshopauthenticate::notifications')

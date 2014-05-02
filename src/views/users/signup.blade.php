@@ -1,9 +1,6 @@
-@extends('webshopauthenticate::base')
+@extends(Config::get('webshopauthenticate::package_layout'))
 @section('content')
 	@if(isset($success))
-		@if (!Sentry::check())
-			<a href="{{ URL::to(\Config::get('webshopauthenticate::uri').'/login') }}" class="btn btn-info btn-sm pull-right">{{ \Lang::get('webshopauthenticate::users.credential.submit') }}</a>
-		@endif
 		<h4>{{ \Lang::get('webshopauthenticate::auth/form.register.signup_done') }}</h4>
 	   	<div id="success" class="alert alert-success">
 	        {{ \Lang::get('webshopauthenticate::auth/form.register.signup_sent_email_1') }} <strong>{{$email}}</strong> {{ \Lang::get('webshopauthenticate::auth/form.register.signup_sent_email_2') }}

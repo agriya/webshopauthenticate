@@ -8,7 +8,7 @@ class AuthController extends \BaseController
 	 *
 	 * @return
 	 */
-	public function index()
+	public function getLogin()
 	{
 		if (\Sentry::check()) {
            	return \Redirect::intended(\Config::get('webshopauthenticate::admin_uri'));
@@ -69,7 +69,7 @@ class AuthController extends \BaseController
 	 *
 	 * @return
 	*/
-	public function signUp()
+	public function getSignup()
 	{
 		return \View::make(\Config::get('webshopauthenticate::signup'));
 	}
@@ -136,7 +136,7 @@ class AuthController extends \BaseController
 	 *
 	 * @return
 	*/
-	public function forgotPassword()
+	public function getForgotpassword()
 	{
 		return \View::make(\Config::get('webshopauthenticate::forgot_password'));
 	}

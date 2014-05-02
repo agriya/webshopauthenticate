@@ -1,4 +1,4 @@
-@extends('webshopauthenticate::base')
+@extends(Config::get('webshopauthenticate::package_layout'))
 @section('content')
 	@include('webshopauthenticate::notifications')
 	<div class = "page-header">
@@ -6,7 +6,7 @@
 	</div>
 	<div class = "panel panel-default stocklist-panel">
 		<div class = "panel-body">
-			{{ Form::open(array('action' => array('Agriya\Webshopauthenticate\AuthController@forgotPassword'), 'class' => 'form-horizontal',  'id' => 'forgotpassword_frm')) }}
+			{{ Form::open(array('action' => array('Agriya\Webshopauthenticate\AuthController@postForgotpassword'), 'class' => 'form-horizontal',  'id' => 'forgotpassword_frm')) }}
 		        <fieldset>
 		            <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 		                {{ Form::label('email', \Lang::get('webshopauthenticate::users.forgot_credential.email_address'), array('class' => 'col-lg-2 control-label required-icon')) }}

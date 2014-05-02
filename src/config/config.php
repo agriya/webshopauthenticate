@@ -10,7 +10,7 @@ return array(
 /*
 *Application URI
 */
-'uri'	=>	'webshop',
+'uri'	=>	'webshop/users',
 /*
 *This view for Login
 */
@@ -26,6 +26,20 @@ return array(
 */
 'signup'	=>	'webshopauthenticate::users/signup',
 
+/*
+* Setting - package layout
+*/
+'package_layout' => 'webshopauthenticate::base',
+
+/*
+* Setting - package layout for admin
+*/
+'package_admin_layout' => 'webshopauthenticate::admin',
+
+/*
+*	This view for User Profile
+*/
+'leftUserProfile' => 'webshopauthenticate::myaccount/leftUserProfileBlock',
 
 /*
 *	This view for forgot password
