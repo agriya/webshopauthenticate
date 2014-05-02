@@ -24,30 +24,7 @@ Breadcrums end --}}
                     {{-- Right side block start --}}
                     <div class="col-lg-6">
                         @if($user_arr['is_shop_owner'])
-                            <div class="panel panel-info no-mar">
-                                <div class="panel-heading">
-                                    @if(count($d_arr['shop_product_list']) > 0)
-                                        <a href='{{ $d_arr['shop_url'] }}' class="pull-right"><i class="fa fa-angle-double-right"></i> {{ trans('webshopauthenticate::myaccount/viewProfile.see_more') }}</a>
-                                    @endif
-                                    <h4>{{ trans('webshopauthenticate::myaccount/viewProfile.shop_products') }}</h4>
-                                </div>
-                                @if(count($d_arr['shop_product_list']) > 0)
-                                    <ul class="list-unstyled list-inline userprofile-shop clearfix mb0">
-                                        @foreach($d_arr['shop_product_list'] AS $prd)
-                                            <?php
-                                                $p_img_arr = $mp_product_service->populateProductDefaultThumbImages($prd->id);
-                                                $p_thumb_img = $mp_product_service->getProductDefaultThumbImage($prd->id, 'thumb', $p_img_arr);
-                                                $view_url = $mp_product_service->getProductViewURL($prd->id, $prd);
-                                            ?>
-                                            <li>
-                                                <a href="{{ $view_url }}" class="img81x64"><img src="{{ $p_thumb_img['image_url'] }}" @if(isset($p_thumb_img["thumbnail_width"])) width='{{ $p_thumb_img["thumbnail_width"] }}' height='{{ $p_thumb_img["thumbnail_height"] }}' @endif title="{{ $prd->product_name  }}" alt="{{ $prd->product_name  }}" /></a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <div class="alert alert-info">{{ trans('webshopauthenticate::myaccount/viewProfile.profile_noshop_products_found') }}</div>
-                                @endif
-                            </div>
+                        	{{\Webshoppack::getShopDetailsView($user_arr['id'], true)}}
                         @endif
                     </div>
                 {{-- Right side block end --}}

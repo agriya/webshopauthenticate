@@ -39,7 +39,7 @@ Add the following to app/routes.php
 		Route::get(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@getIndex');
 		Route::post(\Config::get('webshopauthenticate::uri').'/myaccount', 'Agriya\Webshopauthenticate\AccountController@postIndex');
 	});
-	Route::get(\Config::get('webshopauthenticate::uri').'/{user_code_seo_title}', 'Agriya\Webshopauthenticate\ProfileController@viewProfile')->where('user_code_seo_title', 'U[0-9]{6}+[-A-Za-z]*'); //Call when parameter has user code format value
+	Route::get(\Config::get('webshopauthenticate::uri').'/{user_code_seo_title}', 'Agriya\Webshopauthenticate\ProfileController@viewProfile')->where('user_code_seo_title', 'U[0-9]{6}'); //Call when parameter has user code format value
 	Route::controller(\Config::get('webshopauthenticate::uri'), 'Agriya\Webshopauthenticate\AuthController');
 
 	Route::group(array('before' => 'sentry.admin'), function()
@@ -52,7 +52,7 @@ Add the following to app/routes.php
 		Route::any(Config::get('webshopauthenticate::admin_uri').'/users/changestatus', 'Agriya\Webshopauthenticate\AdminUserController@getChangeUserStatus');
 	});
 
-## Links
+##
 
 Add the following links in member & admin layouts
 

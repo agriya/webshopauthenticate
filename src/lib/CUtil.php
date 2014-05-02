@@ -410,16 +410,19 @@ class CUtil
 	{
 		$user_id = '';
 		$matches = null;
-		preg_match('/^(U[0-9]{6})\-/', $seo_title, $matches);
-		if (!isset($matches[1])) {
-			preg_match('/^(U[0-9]{3})$/', $seo_title, $matches);
-		}
-		if (isset($matches[1])){
-			$user_id = $matches[1];
-			$user_id = ltrim($user_id, 'U');
-			$user_id = ltrim($user_id, '0');
+		if($seo_title == '')
+			return '';
+		//preg_match('/^(U[0-9]{6})\-/', $seo_title, $matches);
+		//if (!isset($matches[1])) {
+		//	preg_match('/^(U[0-9]{3})$/', $seo_title, $matches);
+		//}
+		//if (isset($matches[1])){
 
-		}
+		$user_id = $seo_title;
+		$user_id = ltrim($user_id, 'U');
+		$user_id = ltrim($user_id, '0');
+
+		//}
 		return $user_id;
 	}
 	/**

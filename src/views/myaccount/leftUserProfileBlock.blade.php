@@ -34,7 +34,8 @@
 		<h3>{{ trans('webshopauthenticate::myaccount/viewProfile.shop') }}</h3>
     </div>
 	@if($user_arr['is_shop_owner'] == 'Yes')
-		<a href="{{ $d_arr['shop_url'] }}"><strong>{{{ $d_arr['shop_details']['shop_name'] }}}</strong></a>
+		<?php $d_arr['shop_details'] = \Webshoppack::getShopDetails($user_arr['id']); ?>
+		<a href="{{ $d_arr['shop_details']['shop_url'] }}"><strong>{{{ $d_arr['shop_details']['shop_name'] }}}</strong></a>
 		<p class="text-muted mt10">{{{ $d_arr['shop_details']['shop_slogan'] }}}</p>
 	@else
 		<p class="alert alert-info">{{ trans('webshopauthenticate::myaccount/viewProfile.shop_not_added_yet') }}</p>
