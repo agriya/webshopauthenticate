@@ -24,7 +24,8 @@
 			@endif
 		@else
 			<?php $login_url = \url(\Config::get('webshopauthenticate::uri').'/login?form_type=selLogin'); ?>
-			<li><a href="{{ $login_url }}" class="fn_signuppop"><i class="fa fa-angle-right"></i><span>{{ trans('webshopauthenticate::myaccount/viewProfile.contact') }}</span></a></li>
+			<li><a href="{{Url::to(\Config::get('webshoppack::shop_uri').'/user/message/add/'.$user_details['user_code']) }}" class="fn_signuppop"><i class="fa fa-angle-right"></i><span>{{ trans('webshopauthenticate::myaccount/viewProfile.contact') }}</span></a></li>
+			<!--<li><a href="{{ $login_url }}" class="fn_signuppop"><i class="fa fa-angle-right"></i><span>{{ trans('webshopauthenticate::myaccount/viewProfile.contact') }}</span></a></li>-->
 		@endif
 	</ul>
 </div>

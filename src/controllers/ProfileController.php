@@ -14,7 +14,7 @@ class ProfileController extends \BaseController
 
 	public function viewProfile($user_code_seo_title)
     {
-		$error_msg = trans('myaccount/viewProfile.invalid_user');
+		$error_msg = trans('webshopauthenticate::myaccount/viewProfile.invalid_user');
 		$d_arr = $breadcrumb_arr = $user_arr = array();
 
 		$user_id = CUtil::getUserIdFromSlug($user_code_seo_title);
